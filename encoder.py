@@ -1,7 +1,5 @@
 import sys
 
-OUTPUT_DIR = "domains/"
-
 def main():
     if len(sys.argv) != 3:
         print("Usage: python encoder.py <input_file> <output_file>")
@@ -93,8 +91,6 @@ def find_thermometers(puzzle: list[list[str]]):
 
 def encode_to_clingo(thermometers, col_restrictions, row_restrictions, path):
     n = len(row_restrictions)
-
-    path = OUTPUT_DIR + path
 
     with open(path, "w") as f:
         f.write(f"dim({n}).\n")

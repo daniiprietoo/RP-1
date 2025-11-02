@@ -1,6 +1,7 @@
 import clingo
 import sys
-import os 
+import os
+
 ### Main program
 
 if len(sys.argv) < 2:
@@ -14,12 +15,6 @@ for arg in sys.argv[1:]:
     ctl.load(arg)
 ctl.ground([("base", [])])
 ctl.configuration.solve.models = "2"  # This retrieves 2 models at most
-
-output_dir = 'solutions/'
-os.makedirs(output_dir, exist_ok=True)
-file_name = os.path.basename(sys.argv[2])  # Get just the filename
-file_name = file_name.replace(".lp", "")
-file_name = file_name.replace("domain_", "")
 
 # Solving
 size = 0
@@ -49,8 +44,5 @@ with ctl.solve(yield_=True) as handle:
                 print(el, end="")
             print()
         nummodels = 1
-        with open(f"{output_dir}solution_{file_name}.txt", "w") as f:
-            for line in a:
-                f.write("".join(line) + "\n")
 if nummodels == 0:
     print("UNSATISFIABLE")
